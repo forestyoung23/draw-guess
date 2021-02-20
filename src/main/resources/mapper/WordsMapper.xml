@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.forest.drawguess.mapper.WordsMapper">
+
+    <select id="getRandomWords" resultType="com.forest.drawguess.bean.vo.RandomWordsVO">
+        SELECT
+            *
+        FROM
+            words AS t1
+            JOIN ( SELECT ROUND( RAND () * ( SELECT MAX( id ) FROM words )) AS id ) AS t2
+        WHERE
+            t1.id >= t2.id
+        ORDER BY
+            t1.id ASC
+            LIMIT 1;
+    </select>
+</mapper>
