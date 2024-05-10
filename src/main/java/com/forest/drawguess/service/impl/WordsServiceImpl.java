@@ -6,11 +6,8 @@ import com.forest.drawguess.bean.dto.SubmitAnswerDTO;
 import com.forest.drawguess.bean.pojo.WordsDO;
 import com.forest.drawguess.bean.vo.RandomWordsVO;
 import com.forest.drawguess.mapper.WordsMapper;
-
 import com.forest.drawguess.service.WordsService;
 import jakarta.annotation.Resource;
-import org.springframework.cache.Cache;
-import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,8 +27,6 @@ public class WordsServiceImpl extends ServiceImpl<WordsMapper, WordsDO> implemen
     @Resource
     private WordsMapper wordsMapper;
 
-    @Resource
-    private CacheManager cacheManager;
 
     /**
      * 记录用户积分
@@ -80,28 +75,29 @@ public class WordsServiceImpl extends ServiceImpl<WordsMapper, WordsDO> implemen
      */
     @Override
     public String submit(SubmitAnswerDTO dto) {
-        Cache cache = cacheManager.getCache("selectOne");
-        if (null != cache.get(dto.getWord())) {
-            synchronized (WordsServiceImpl.class) {
-                if (null != cache.get(dto.getWord())) {
-                    // TODO: 2021/2/7 答对，分数+1，删除缓存
-                    if (SCORE.containsKey(dto.getUserName())) {
-                        // 答对分数+1
-                        SCORE.put(dto.getUserName(), SCORE.get(dto.getUserName()) + 1);
-                    } else {
-                        // 第一次答对记1分
-                        SCORE.put(dto.getUserName(), 1);
-                    }
-                    return "回答正确";
-                } else {
-                    // TODO: 2021/2/7 并发操作，谁先获得锁谁成功
-                    return "回答错误";
-                }
-            }
-        } else {
-            // TODO: 2021/2/7 答错
-            return "回答错误";
-        }
+        return null;
+//        Cache cache = cacheManager.getCache("selectOne");
+//        if (null != cache.get(dto.getWord())) {
+//            synchronized (WordsServiceImpl.class) {
+//                if (null != cache.get(dto.getWord())) {
+//                    // TODO: 2021/2/7 答对，分数+1，删除缓存
+//                    if (SCORE.containsKey(dto.getUserName())) {
+//                        // 答对分数+1
+//                        SCORE.put(dto.getUserName(), SCORE.get(dto.getUserName()) + 1);
+//                    } else {
+//                        // 第一次答对记1分
+//                        SCORE.put(dto.getUserName(), 1);
+//                    }
+//                    return "回答正确";
+//                } else {
+//                    // TODO: 2021/2/7 并发操作，谁先获得锁谁成功
+//                    return "回答错误";
+//                }
+//            }
+//        } else {
+//            // TODO: 2021/2/7 答错
+//            return "回答错误";
+//        }
     }
 
     /**

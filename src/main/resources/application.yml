@@ -6,3 +6,6 @@ spring:
         password: Forest@123
         url: jdbc:mysql://47.119.31.234:3316/test?useSSL=false&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowMultiQueries=true
         username: root
+logging:
+    level:
+        root: debug
