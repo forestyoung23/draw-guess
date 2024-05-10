@@ -5,9 +5,9 @@ import com.forest.drawguess.bean.dto.SubmitAnswerDTO;
 import com.forest.drawguess.bean.dto.WordsDTO;
 import com.forest.drawguess.bean.vo.RandomWordsVO;
 import com.forest.drawguess.service.WordsService;
+import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**

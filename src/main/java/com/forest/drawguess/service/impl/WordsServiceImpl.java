@@ -8,13 +8,13 @@ import com.forest.drawguess.bean.vo.RandomWordsVO;
 import com.forest.drawguess.mapper.WordsMapper;
 
 import com.forest.drawguess.service.WordsService;
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.CacheManager;
+import jakarta.annotation.Resource;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
