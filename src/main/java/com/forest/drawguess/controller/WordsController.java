@@ -71,4 +71,9 @@ public class WordsController {
     public String importWords(@RequestBody WordsDTO dto) {
         return wordsService.importWords(dto.getWords());
     }
+
+    @PostMapping("test")
+    public void test() throws InterruptedException {
+        Thread.sleep(100);
+    }
 }
